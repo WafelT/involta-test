@@ -1,0 +1,25 @@
+# Nuxt
+.nuxt
+.output
+.data
+.nitro
+.cache
+dist
+
+# Node
+node_modules
+*.log*
+.DS_Store
+
+# Env
+.env
+.env.*
+!.env.example
+
+# IDE
+.idea
+*.swp
+*.swo
+
+# Misc
+mss-api-data.xml
