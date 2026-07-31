@@ -1,0 +1,16 @@
+node_modules
+.nuxt
+.output
+.data
+.nitro
+.cache
+dist
+.git
+.cursor
+*.log
+.DS_Store
+.env
+.env.*
+mss-api-data.xml
+README.md
+.dockerignore

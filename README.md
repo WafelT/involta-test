@@ -12,8 +12,9 @@ SSR-приложение-агрегатор новостей на **Nuxt 3 + Vue
 ## Требования
 
 - Node.js >= 20.12 (рекомендуется 22, см. `.nvmrc`)
+- либо Docker / Docker Compose
 
-## Запуск
+## Запуск локально
 
 ```bash
 nvm use
@@ -22,6 +23,31 @@ npm run dev
 ```
 
 Откройте [http://localhost:3000](http://localhost:3000).
+
+## Запуск через Docker
+
+Одной командой (сборка + запуск production SSR):
+
+```bash
+docker compose up --build
+```
+
+После старта приложение доступно на [http://localhost:3000](http://localhost:3000).
+
+Остановка:
+
+```bash
+docker compose down
+```
+
+Альтернатива без Compose:
+
+```bash
+docker build -t involta-news .
+docker run --rm -p 3000:3000 involta-news
+```
+
+Контейнер слушает `0.0.0.0:3000`, внутри запускается Nitro-сервер Nuxt (`node .output/server/index.mjs`). RSS по-прежнему запрашиваются с хостов Mos.ru и Lenta.ru при работе контейнера — нужен доступ в интернет.
 
 ## Возможности (по ТЗ)
 
@@ -54,4 +80,4 @@ npm run dev
 
 Из-за этого при сохранённом режиме `list` возможен краткий **layout shift** (сначала приходит `grid`, затем применяется `list`). Это следствие требования ТЗ использовать именно `localStorage`, а не cookie / query / URL — иначе режим можно было бы учесть уже на сервере и отдать сразу нужную разметку.
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+Чтобы не ломать гидрацию (mismatch SSR ↔ клиент), значение из `localStorage` применяется только после `onMounted`, а не во время первого клиентского рендера.
