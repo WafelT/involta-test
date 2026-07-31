@@ -18,6 +18,7 @@ node_modules
 
 # IDE
 .idea
+.cursor
 *.swp
 *.swo
 
